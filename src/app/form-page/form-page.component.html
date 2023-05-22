@@ -1,1 +1,182 @@
 <p>form-page works!</p>
+<h1>Form Page</h1>
+<form [formGroup]="reactiveForm" #form="ngForm">
+  <div class="container-fluid py-3">
+    <div class="row my-3">
+      <div class="col">
+        <label for="name" class="form-label">Traveller Name</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          id="name"
+          name="name"
+          formControlName="name"
+          required
+          minlength="1"
+          maxlength="250"
+          [class.is-invalid]="name.invalid && (name.dirty || name.touched)"
+        />
+        <div
+          *ngIf="name.invalid && (name.dirty || name.touched)"
+          class="invalid-feedback"
+        >
+          <div *ngIf="name.errors?.['required']">This field is required.</div>
+          <div *ngIf="name.errors?.['minlength']">
+            This field must have at least 1 character.
+          </div>
+          <div *ngIf="name.errors?.['maxlength']">
+            This field must have at most 250 characters.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <label for="email" class="form-label">Traveller Email</label>
+        <input
+          type="email"
+          class="form-control form-control-sm"
+          id="email"
+          name="email"
+          formControlName="email"
+          required
+          minlength="1"
+          maxlength="250"
+          [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+        />
+        <div
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+          class="invalid-feedback"
+        >
+          <div *ngIf="email.errors?.['required']">This field is required.</div>
+          <div *ngIf="email.errors?.['minlength']">
+            This field must have at least 1 character.
+          </div>
+          <div *ngIf="email.errors?.['maxlength']">
+            This field must have at most 250 characters.
+          </div>
+          <div
+            *ngIf="!email.errors?.['required'] && !email.errors?.['minlength'] && !email.errors?.['maxlength'] && email.errors?.['emailValidator']"
+          >
+            Invalid email format.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <label for="channel" class="form-label">Channel</label>
+        <select
+          class="form-control form-control-sm"
+          id="channel"
+          name="channel"
+          formControlName="channel"
+          required
+          [class.is-invalid]="channel.invalid && (channel.dirty || channel.touched)"
+        >
+          <option value="">Select channel</option>
+          <option value="Partner">Partner</option>
+          <option value="Agent">Agent</option>
+          <option value="Direct_customer">Direct customer</option>
+        </select>
+        <div *ngIf="channel.invalid && (channel.dirty || channel.touched)"
+          class="invalid-feedback"
+        >
+          <div *ngIf="channel.errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <label for="travelDate" class="form-label">Travel Date</label>
+        <input
+          type="date"
+          class="form-control form-control-sm"
+          id="travelDate"
+          name="travelDate"
+          formControlName="travelDate"
+          required
+          [class.is-invalid]="travelDate.invalid && (travelDate.dirty || travelDate.touched)"
+        />
+        <div *ngIf="travelDate.invalid && (travelDate.dirty || travelDate.touched)"
+          class="invalid-feedback"
+        >
+          <div *ngIf="travelDate.errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label for="travelTime" class="form-label">Travel Time</label>
+        <input
+          type="time"
+          class="form-control form-control-sm"
+          id="travelTime"
+          name="travelTime"
+          formControlName="travelTime"
+          required
+          [class.is-invalid]="travelTime.invalid && (travelTime.dirty || travelTime.touched)"
+        />
+        <div *ngIf="travelTime.invalid && (travelTime.dirty || travelTime.touched)"
+          class="invalid-feedback"
+        >
+          <div *ngIf="travelTime.errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <label for="bookingPrice" class="form-label">Booking price</label>
+        <input
+          type="number"
+          class="form-control form-control-sm"
+          id="bookingPrice"
+          name="bookingPrice"
+          formControlName="bookingPrice"
+          required
+          [class.is-invalid]="bookingPrice.invalid && (bookingPrice.dirty || bookingPrice.touched)"
+        />
+        <div *ngIf="bookingPrice.invalid && (bookingPrice.dirty || bookingPrice.touched)"
+          class="invalid-feedback"
+        >
+          <div *ngIf="bookingPrice.errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="meetGreetOption"
+            name="meetGreetOption"
+            formControlName="meetGreetOption"
+            required
+            [class.is-invalid]="meetGreetOption.invalid && (meetGreetOption.dirty || meetGreetOption.touched)"
+          />
+          <label class="form-check-label" for="meetGreetOption"
+            >Meet & Greet option Requested</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <button
+          type="button"
+          class="btn btn-primary btn-outline btn-sm"
+          (click)="submitForm()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
